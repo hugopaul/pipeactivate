@@ -24,7 +24,7 @@ public class pipeCallerController {
         System.out.println("objeto recebido -->"+ object.toString());
         System.out.println("request recebidos" + request.toString());
 
-        String cmd = "./pipes/imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
+        String cmd = "sh /pipes/imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
         //tratamento de erro e execução do script
 
         try {

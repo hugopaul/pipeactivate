@@ -25,7 +25,7 @@ public class pipeCallerController {
         System.out.println("request recebidos" + request.toString());
 
         String[] env = {"PATH=/pipes"};
-        String cmd = "imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
+        String cmd = "./imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
         //tratamento de erro e execução do script
 
         try {

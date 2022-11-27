@@ -24,12 +24,11 @@ public class pipeCallerController {
         System.out.println("objeto recebido -->"+ object.toString());
         System.out.println("request recebidos" + request.toString());
 
-        String[] env = {"PATH=/pipes"};
-        String cmd = "./imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
+        String cmd = "./pipes/imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
         //tratamento de erro e execução do script
 
         try {
-            Process process = Runtime.getRuntime().exec(cmd, env);
+            Process process = Runtime.getRuntime().exec(cmd);
         } catch (IOException ex) {
             Logger.getLogger("io exception ao executar pipe imslandingpage.sh").log(Level.SEVERE, "io exception ao executar pipe imslandingpage.sh", ex);
         }

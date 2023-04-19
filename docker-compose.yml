@@ -1,0 +1,14 @@
+version: "3.7
+
+services:
+  pipecaller:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: pipe-caller
+    volumes:
+      - workspace:/opt/workspace/
+    ports:
+      - 9090:9090
+volumes:
+  workspace:

@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: pipe-caller
     volumes:
-      - workspace:/opt/workspace/
+      - /opt/workspace/pipes:/opt/workspace/pipes
     ports:
       - 9090:9090
 volumes:

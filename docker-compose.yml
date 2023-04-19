@@ -10,5 +10,3 @@ services:
       - /opt/workspace/pipes:/opt/workspace/pipes
     ports:
       - 9090:9090
-volumes:
-  workspace:

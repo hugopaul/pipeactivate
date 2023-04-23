@@ -43,11 +43,13 @@ public class pipeCallerController {
         System.out.println("request recebidos" + request.toString());
         String cmd;
         if(object.toString().contains("ref=refs/heads/develop")){
-            cmd = "sh /opt/workspaces/pipes/controlefinanceiro-dev.sh";
+            System.out.println("entrou no if contem --> 'ref=refs/heads/develop' ");
+            cmd = "sh /opt/workspaces/pipes/acionador-controlefinanceiro-dev.sh";
         }else if(object.toString().contains("ref=refs/heads/prod")){
-            cmd = "sh /opt/workspaces/pipes/controlefinanceiro-prod.sh";
+            System.out.println("entrou no if contem --> 'ref=refs/heads/prod' ");
+            cmd = "sh /opt/workspaces/pipes/acionador-controlefinanceiro-prod.sh";
         }else{
-            cmd = "sh /opt/workspaces/pipes/controlefinanceiro-dev.sh";
+            cmd = "sh /opt/workspaces/pipes/acionador-controlefinanceiro-dev.sh";
         }
 
         //tratamento de erro e execução do script

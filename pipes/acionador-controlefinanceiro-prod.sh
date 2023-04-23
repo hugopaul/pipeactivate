@@ -4,17 +4,12 @@
 USER="root"
 HOST="45.56.70.78"
 PASSWORD="Reisapao123*"
-SHEL_FILE="/opt/workspace/controlefinanceiro-prod.sh"
-SRC_FILE="/opt/workspace/pipes"
+SHEL_FILE="/opt/workspace/pipeactivate/controlefinanceiro-prod.sh"
 
 # Crie um arquivo temporário para armazenar a senha
 PASSFILE=$(mktemp)
 echo "${PASSWORD}" > "${PASSFILE}"
 chmod 400 "${PASSFILE}"
-
-# Copie o arquivo via SCP
-sshpass -f "${PASSFILE}" scp "${SHEL_FILE}" "${USER}"@"${HOST}":"${SRC_FILE}"
-
 
 # Execute o comando via SSH, exportando a variável de ambiente
 sshpass -f "${PASSFILE}" ssh "${USER}"@"${HOST}" sh "${SHEL_FILE}"

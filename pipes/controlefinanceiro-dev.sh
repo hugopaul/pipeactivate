@@ -7,6 +7,10 @@ git clone https://github.com/hugopaul/controlefinanceiro.git
 
 cd controlefinanceiro
 
+git branch develop
+
+git pull
+
 docker build -t=hugopaul/controlefinanceiro-dev -f Dockerfile-dev .
 
 docker rm controlefinanceiro-dev -f

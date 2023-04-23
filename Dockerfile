@@ -10,8 +10,10 @@ RUN mvn -f /home/app/pom.xml clean package
 # Package stage
 #
 FROM openjdk:20-slim
+RUN apt-get update
+RUN apt-get install ssh -y
 COPY --from=build /home/app/target/pipeactivate-0.0.8-SNAPSHOT.jar /usr/local/lib/
-COPY pipes/ /usr/local/lib/
+COPY pipes/ /opt/workspace/pipes/
 EXPOSE 9090
 ENTRYPOINT ["java","-jar","/usr/local/lib/pipeactivate-0.0.8-SNAPSHOT.jar"]
 

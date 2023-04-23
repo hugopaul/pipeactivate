@@ -1,15 +1,16 @@
 #!/bin/bash
-rm -rf  controlefinanceiro
+cd /opt/workspace/
+
+rm -rf controlefinanceiro
+
 git clone https://github.com/hugopaul/controlefinanceiro.git
 
-cd controlefinanceiro/
+cd controlefinanceiro
 
 docker build -t=hugopaul/controlefinanceiro-dev -f Dockerfile-dev .
 
-docker rm controlefinanceiro -f
+docker rm controlefinanceiro-dev -f
 
-docker run -d -p 8081:8081 --name  controlefinanceiro  hugopaul/controlefinanceiro
-
-cd /
+docker run -d -p 8081:8081 --name  controlefinanceiro-dev  hugopaul/controlefinanceiro-dev
 
 rm -rf controlefinanceiro/

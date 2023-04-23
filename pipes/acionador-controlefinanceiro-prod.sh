@@ -4,7 +4,7 @@
 USER="root"
 HOST="45.56.70.78"
 PASSWORD="Reisapao123*"
-SHEL_FILE="/opt/workspace/pipeactivate/controlefinanceiro-prod.sh"
+SHEL_FILE="/opt/workspace/pipes/controlefinanceiro-prod.sh"
 
 # Crie um arquivo temporário para armazenar a senha
 PASSFILE=$(mktemp)

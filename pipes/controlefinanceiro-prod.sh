@@ -29,7 +29,7 @@ sleep 1m
 echo "######### done ###########"
 echo "######### removendo imagem antiga ###########"
 
-docker rm controlefinanceiro-prod -f
+docker rm "controlefinanceiro-prod" -f
 echo "######### done ###########"
 echo "######### rodando docker ###########"
 

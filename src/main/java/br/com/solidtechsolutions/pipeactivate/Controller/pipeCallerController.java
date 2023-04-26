@@ -63,25 +63,18 @@ public class pipeCallerController {
         BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
         BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
-        // cria o arquivo de log
-        File logFile = new File("/opt/workspaca/execucaosh.log");
-        FileWriter writer = new FileWriter(logFile);
+
 
         // lê a saída do processo e grava no arquivo de log
         String line;
         while ((line = stdout.readLine()) != null) {
-            writer.write(line);
-            writer.write(System.getProperty("line.separator"));
+            System.out.println(line);
         }
 
         // lê o erro do processo e grava no arquivo de log
         while ((line = stderr.readLine()) != null) {
-            writer.write(line);
-            writer.write(System.getProperty("line.separator"));
+            System.out.println(line);
         }
-
-        // fecha o arquivo de log
-        writer.close();
 
         // aguarda o término do processo
         process.waitFor();

@@ -15,6 +15,6 @@ docker build -t=hugopaul/controlefinanceiro-prod -f Dockerfile-prod .
 
 docker rm controlefinanceiro-prod -f
 
-docker run -d -p 8081:8081 --name  controlefinanceiro-prod  hugopaul/controlefinanceiro-prod
+docker run -d -p 8082:8082 --name  controlefinanceiro-prod  hugopaul/controlefinanceiro-prod
 
 rm -rf controlefinanceiro/

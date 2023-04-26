@@ -22,6 +22,7 @@ public class pipeCallerController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
         System.out.println("endpoint controlefinanceiro ativado");
+        System.out.println(object.toString().substring(0,150));
         String cmd = getCommand(object.toString());
         executeCommand(cmd);
     }

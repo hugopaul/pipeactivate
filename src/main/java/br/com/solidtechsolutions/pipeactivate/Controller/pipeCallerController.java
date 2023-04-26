@@ -18,69 +18,53 @@ import java.util.logging.Logger;
 public class pipeCallerController {
 
 
-    @PostMapping("/imslandingpage")
-    @ResponseStatus(HttpStatus.ACCEPTED)
-    public void imsLandingpagePipeCaller(@RequestBody Object object, HttpServletRequest request) {
-
-        System.out.println("objeto recebido -->"+ object.toString());
-        System.out.println("request recebidos" + request.toString());
-
-        String cmd = "sh /pipes/imslandingpage.sh";  //e.g test.sh -dparam1 -oout.txt
-        //tratamento de erro e execução do script
-
-        try {
-            Process process = Runtime.getRuntime().exec(cmd);
-        } catch (IOException ex) {
-            Logger.getLogger("io exception ao executar pipe imslandingpage.sh").log(Level.SEVERE, "io exception ao executar pipe imslandingpage.sh", ex);
-        }
-
-    }
     @PostMapping("/controlefinanceiro")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
-        System.out.println("objeto recebido -->" + object.toString());
-        System.out.println("request recebidos" + request.toString());
+        log.info("endpoint controlefinanceiro ativado");
         String cmd = getCommand(object.toString());
         executeCommand(cmd);
     }
+
     private String getCommand(String objectString) {
-        if (objectString.contains("ref=refs/heads/develop")) {
-            System.out.println("entrou no if contem --> 'ref=refs/heads/develop' ");
+        if (objectString.startsWith("ref=refs/heads/develop")) {
+            log.info("branch origin --> ref=refs/heads/develop ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
-        } else if (objectString.contains("ref=refs/heads/prod")) {
-            System.out.println("entrou no if contem --> 'ref=refs/heads/prod' ");
+        } else if (objectString.startsWith("ref=refs/heads/prod")) {
+            log.info("branch origin --> ref=refs/heads/prod ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-prod.sh";
-        } else {
-            return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
         }
+        return null;
     }
 
     private void executeCommand(String cmd) throws IOException, InterruptedException {
-        System.out.println("rodando sh");
-        Process process = Runtime.getRuntime().exec(cmd);
+        log.info("rodando sh");
+        if (cmd != null) {
+            Process process = Runtime.getRuntime().exec(cmd);
 
-        // cria os objetos para ler a saída e o erro do processo
-        BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
-        BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+            // cria os objetos para ler a saída e o erro do processo
+            BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
 
 
+            // lê a saída do processo e grava no arquivo de log
+            String line;
+            while ((line = stdout.readLine()) != null) {
+                log.info(line);
+            }
 
-        // lê a saída do processo e grava no arquivo de log
-        String line;
-        while ((line = stdout.readLine()) != null) {
-            System.out.println(line);
+            // lê o erro do processo e grava no arquivo de log
+            while ((line = stderr.readLine()) != null) {
+                log.info(line);
+            }
+
+            // aguarda o término do processo
+            process.waitFor();
+
+            // imprime o status de saída do processo
+            log.info("status: " + process.exitValue());
         }
 
-        // lê o erro do processo e grava no arquivo de log
-        while ((line = stderr.readLine()) != null) {
-            System.out.println(line);
-        }
-
-        // aguarda o término do processo
-        process.waitFor();
-
-        // imprime o status de saída do processo
-        System.out.println("status: " + process.exitValue());
     }
 }
 

@@ -23,8 +23,9 @@ echo "######### fazendo pull ###########"
 git pull
 echo "######### done ###########"
 echo "######### buildando docker ###########"
+sh /opt/workspace/pipeactivate/pipes/build-dev.sh
 
-docker build -t=hugopaul/controlefinanceiro-dev -f Dockerfile-dev .
+sleep 1m
 echo "######### done ###########"
 echo "######### removendo imagem antiga ###########"
 

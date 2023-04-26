@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 @RequestMapping("/pipecaller")
 public class pipeCallerController {
 
+
     @PostMapping("/imslandingpage")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void imsLandingpagePipeCaller(@RequestBody Object object, HttpServletRequest request) {
@@ -34,31 +35,31 @@ public class pipeCallerController {
         }
 
     }
-
     @PostMapping("/controlefinanceiro")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) {
-
-        System.out.println("objeto recebido -->"+ object.toString());
+    public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException {
+        System.out.println("objeto recebido -->" + object.toString());
         System.out.println("request recebidos" + request.toString());
-        String cmd;
-        if(object.toString().contains("ref=refs/heads/develop")){
+        String cmd = getCommand(object.toString());
+        executeCommand(cmd);
+    }
+    private String getCommand(String objectString) {
+        if (objectString.contains("ref=refs/heads/develop")) {
             System.out.println("entrou no if contem --> 'ref=refs/heads/develop' ");
-            cmd = "sh pipes/controlefinanceiro-dev.sh";
-        }else if(object.toString().contains("ref=refs/heads/prod")){
+            return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
+        } else if (objectString.contains("ref=refs/heads/prod")) {
             System.out.println("entrou no if contem --> 'ref=refs/heads/prod' ");
-            cmd = "sh pipes/controlefinanceiro-prod.sh";
-        }else{
-            cmd = "sh pipes/controlefinanceiro-dev.sh";
+            return "sh /opt/workspace/pipeactivate/pipes/pipes/controlefinanceiro-prod.sh";
+        } else {
+            return "sh /opt/workspace/pipeactivate/pipes/pipes/controlefinanceiro-dev.sh";
         }
+    }
 
-        //tratamento de erro e execução do script
-
-        try {
-            Process process = Runtime.getRuntime().exec(cmd);
-        } catch (IOException ex) {
-            Logger.getLogger("io exception ao executar pipe controlefinanceiro-dev.sh").log(Level.SEVERE, "io exception ao executar pipe controlefinanceiro-dev.sh", ex);
-        }
-
+    private void executeCommand(String cmd) throws IOException {
+        System.out.println("rodando sh");
+        Process process = Runtime.getRuntime().exec(cmd);
+        System.out.println(process);
     }
 }
+
+

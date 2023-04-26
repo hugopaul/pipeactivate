@@ -23,7 +23,7 @@ echo "######### fazendo pull ###########"
 git pull
 echo "######### done ###########"
 echo "######### buildando docker ###########"
-sh /opt/workspace/pipeactivate/pipes/build-prod.sh
+sh /opt/workspace/pipeactivate/pipes/build-prod.sh &
 
 sleep 1m
 echo "######### done ###########"

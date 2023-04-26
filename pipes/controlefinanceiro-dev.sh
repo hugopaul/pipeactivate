@@ -7,7 +7,7 @@ git clone https://github.com/hugopaul/controlefinanceiro.git
 
 cd controlefinanceiro
 
-git branch develop
+git checkout develop
 
 git pull
 

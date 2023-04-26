@@ -21,24 +21,24 @@ public class pipeCallerController {
     @PostMapping("/controlefinanceiro")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
-        log.info("endpoint controlefinanceiro ativado");
+        System.out.println("endpoint controlefinanceiro ativado");
         String cmd = getCommand(object.toString());
         executeCommand(cmd);
     }
 
     private String getCommand(String objectString) {
         if (objectString.startsWith("ref=refs/heads/develop")) {
-            log.info("branch origin --> ref=refs/heads/develop ");
+            System.out.println("branch origin --> ref=refs/heads/develop ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
         } else if (objectString.startsWith("ref=refs/heads/prod")) {
-            log.info("branch origin --> ref=refs/heads/prod ");
+            System.out.println("branch origin --> ref=refs/heads/prod ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-prod.sh";
         }
         return null;
     }
 
     private void executeCommand(String cmd) throws IOException, InterruptedException {
-        log.info("rodando sh");
+        System.out.println("rodando sh");
         if (cmd != null) {
             Process process = Runtime.getRuntime().exec(cmd);
 
@@ -50,19 +50,19 @@ public class pipeCallerController {
             // lê a saída do processo e grava no arquivo de log
             String line;
             while ((line = stdout.readLine()) != null) {
-                log.info(line);
+                System.out.println(line);
             }
 
             // lê o erro do processo e grava no arquivo de log
             while ((line = stderr.readLine()) != null) {
-                log.info(line);
+                System.out.println(line);
             }
 
             // aguarda o término do processo
             process.waitFor();
 
             // imprime o status de saída do processo
-            log.info("status: " + process.exitValue());
+            System.out.println("status: " + process.exitValue());
         }
 
     }

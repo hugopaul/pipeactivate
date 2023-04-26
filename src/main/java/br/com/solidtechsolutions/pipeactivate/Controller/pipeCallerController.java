@@ -27,10 +27,10 @@ public class pipeCallerController {
     }
 
     private String getCommand(String objectString) {
-        if (objectString.startsWith("ref=refs/heads/develop")) {
+        if (objectString.startsWith("{ref=refs/heads/develop")) {
             System.out.println("branch origin --> ref=refs/heads/develop ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
-        } else if (objectString.startsWith("ref=refs/heads/prod")) {
+        } else if (objectString.startsWith("{ref=refs/heads/prod")) {
             System.out.println("branch origin --> ref=refs/heads/prod ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-prod.sh";
         }

@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import java.io.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,7 +37,7 @@ public class pipeCallerController {
     }
     @PostMapping("/controlefinanceiro")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException {
+    public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
         System.out.println("objeto recebido -->" + object.toString());
         System.out.println("request recebidos" + request.toString());
         String cmd = getCommand(object.toString());
@@ -49,16 +49,45 @@ public class pipeCallerController {
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
         } else if (objectString.contains("ref=refs/heads/prod")) {
             System.out.println("entrou no if contem --> 'ref=refs/heads/prod' ");
-            return "sh /opt/workspace/pipeactivate/pipes/pipes/controlefinanceiro-prod.sh";
+            return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-prod.sh";
         } else {
-            return "sh /opt/workspace/pipeactivate/pipes/pipes/controlefinanceiro-dev.sh";
+            return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
         }
     }
 
-    private void executeCommand(String cmd) throws IOException {
+    private void executeCommand(String cmd) throws IOException, InterruptedException {
         System.out.println("rodando sh");
         Process process = Runtime.getRuntime().exec(cmd);
-        System.out.println(process);
+
+        // cria os objetos para ler a saída e o erro do processo
+        BufferedReader stdout = new BufferedReader(new InputStreamReader(process.getInputStream()));
+        BufferedReader stderr = new BufferedReader(new InputStreamReader(process.getErrorStream()));
+
+        // cria o arquivo de log
+        File logFile = new File("/opt/workspaca/execucaosh.log");
+        FileWriter writer = new FileWriter(logFile);
+
+        // lê a saída do processo e grava no arquivo de log
+        String line;
+        while ((line = stdout.readLine()) != null) {
+            writer.write(line);
+            writer.write(System.getProperty("line.separator"));
+        }
+
+        // lê o erro do processo e grava no arquivo de log
+        while ((line = stderr.readLine()) != null) {
+            writer.write(line);
+            writer.write(System.getProperty("line.separator"));
+        }
+
+        // fecha o arquivo de log
+        writer.close();
+
+        // aguarda o término do processo
+        process.waitFor();
+
+        // imprime o status de saída do processo
+        System.out.println("status: " + process.exitValue());
     }
 }
 

@@ -22,18 +22,36 @@ public class pipeCallerController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void controleFinanceiroPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
         System.out.println("endpoint controlefinanceiro ativado");
-        System.out.println(object.toString().substring(0,150));
-        String cmd = getCommand(object.toString());
+        System.out.println(object.toString().substring(0,50));
+        String cmd = getCommandControleFinanceiroBackend(object.toString());
+        executeCommand(cmd);
+    }
+    @PostMapping("/controlefinanceiro-front")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void controleFinanceiroFrontPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
+        System.out.println("endpoint controlefinanceiro-front ativado");
+        System.out.println(object.toString().substring(0,50));
+        String cmd = getCommandControleFinanceiroFrontend(object.toString());
         executeCommand(cmd);
     }
 
-    private String getCommand(String objectString) {
+    private String getCommandControleFinanceiroBackend(String objectString) {
         if (objectString.startsWith("{ref=refs/heads/develop")) {
             System.out.println("branch origin --> ref=refs/heads/develop ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-dev.sh";
         } else if (objectString.startsWith("{ref=refs/heads/prod")) {
             System.out.println("branch origin --> ref=refs/heads/prod ");
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-prod.sh";
+        }
+        return null;
+    }
+    private String getCommandControleFinanceiroFrontend(String objectString) {
+        if (objectString.startsWith("{ref=refs/heads/develop")) {
+            System.out.println("branch origin --> ref=refs/heads/develop ");
+            return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-front-dev.sh";
+        } else if (objectString.startsWith("{ref=refs/heads/prod")) {
+            System.out.println("branch origin --> ref=refs/heads/prod ");
+            return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-front-prod.sh";
         }
         return null;
     }

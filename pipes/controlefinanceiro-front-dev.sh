@@ -23,6 +23,16 @@ echo "######### fazendo pull ###########"
 
 git pull
 echo "######### done ###########"
+echo "#########  npm install ###########"
+
+npm install -g
+
+echo "######### done ###########"
+echo "######### buildando projeto ###########"
+
+ng build --configuration=dev
+
+echo "######### done ###########"
 echo "######### buildando docker ###########"
 
 docker build -t=hugopaul/controlefinanceiro-front-dev -f Dockerfile-dev .

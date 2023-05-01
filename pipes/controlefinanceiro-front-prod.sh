@@ -18,10 +18,22 @@ echo "######### done ###########"
 echo "######### trocando de branch  ###########"
 
 git checkout prod
+
 echo "######### done ###########"
 echo "######### fazendo pull ###########"
 
 git pull
+
+echo "######### done ###########"
+echo "#########  npm install ###########"
+
+npm install -g
+
+echo "######### done ###########"
+echo "######### buildando projeto ###########"
+
+ng build --configuration=prod
+
 echo "######### done ###########"
 echo "######### buildando docker ###########"
 

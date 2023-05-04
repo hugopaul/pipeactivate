@@ -37,7 +37,7 @@ ng build --configuration=prod
 echo "######### done ###########"
 echo "######### buildando docker ###########"
 
-docker build -t=hugopaul/controlefinanceiro-prod-dev -f Dockerfile-dev .
+docker build -f Dockerfile-prod  -t=hugopaul/controlefinanceiro-front-prod .
 
 echo "######### done ###########"
 echo "######### removendo imagem antiga ###########"

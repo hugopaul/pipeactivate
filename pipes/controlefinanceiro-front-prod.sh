@@ -5,7 +5,7 @@ cd /opt/workspace/controlefinanceiro-front
 echo "######### done ###########"
 echo "######### trocando de branch  ###########"
 
-git checkout develop
+git checkout prod
 echo "######### done ###########"
 echo "######### fazendo pull ###########"
 

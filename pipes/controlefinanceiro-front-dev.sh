@@ -25,7 +25,7 @@ git pull
 echo "######### done ###########"
 echo "#########  npm install ###########"
 
-npm install -g
+npm install
 
 echo "######### done ###########"
 echo "######### buildando projeto ###########"

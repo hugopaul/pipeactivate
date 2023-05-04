@@ -1,29 +1,15 @@
 #!/bin/bash
 
 echo "######### entrando diretorio ###########"
-cd /opt/workspace/
-echo "######### done ###########"
-echo "######### removendo diretorio ###########"
-
-rm -rf controlefinanceiro-front
-echo "######### done ###########"
-echo "######### clonando projeto ###########"
-
-git clone https://github.com/hugopaul/controlefinanceiro-front.git
-echo "######### done ###########"
-echo "######### entrando diretorio clonado ###########"
-
-cd controlefinanceiro-front
+cd /opt/workspace/controlefinanceiro-front
 echo "######### done ###########"
 echo "######### trocando de branch  ###########"
 
-git checkout prod
-
+git checkout develop
 echo "######### done ###########"
 echo "######### fazendo pull ###########"
 
 git pull
-
 echo "######### done ###########"
 echo "#########  npm install ###########"
 
@@ -47,9 +33,5 @@ docker rm "controlefinanceiro-front-prod" -f
 echo "######### done ###########"
 echo "######### rodando docker ###########"
 
-docker run -d -p 82:82 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod
-echo "######### done ###########"
-echo "######### removendo pasta ###########"
-
-rm -rf controlefinanceiro-front/
+docker run -d -p 80:82 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod
 echo "######### done ###########"

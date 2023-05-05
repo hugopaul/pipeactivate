@@ -33,5 +33,5 @@ docker rm "controlefinanceiro-front-prod" -f
 echo "######### done ###########"
 echo "######### rodando docker ###########"
 
-docker run -d -p 80:82 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod
+docker run -d -p 82:80 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod
 echo "######### done ###########"

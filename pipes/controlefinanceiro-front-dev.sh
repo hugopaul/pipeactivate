@@ -22,7 +22,7 @@ npm install
 echo "######### done ###########"
 echo "######### buildando projeto ###########"
 
-ng build --configuration=dev --base-href=/controle-dev/
+ng build --configuration=dev
 
 echo "######### done ###########"
 echo "######### buildando docker ###########"

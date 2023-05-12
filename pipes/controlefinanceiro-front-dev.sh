@@ -20,6 +20,11 @@ echo "#########  npm install ###########"
 npm install
 
 echo "######### done ###########"
+echo "######### removendo pasta build ###########"
+
+rm -rf dist
+
+echo "######### done ###########"
 echo "######### buildando projeto ###########"
 
 ng build --configuration=dev --base-href=/controle-dev/

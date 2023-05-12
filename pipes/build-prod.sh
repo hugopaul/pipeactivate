@@ -12,7 +12,7 @@ git clone -b prod https://github.com/hugopaul/controlefinanceiro.git
 echo "######### done ###########"
 echo "######### entrando diretorio clonado ###########"
 
-cd controlefinanceiro
+cd /opt/workspace/controlefinanceiro
 
 echo "######### done ###########"
 echo "######### buildando docker ###########"

@@ -13,10 +13,7 @@ echo "######### done ###########"
 echo "######### entrando diretorio clonado ###########"
 
 cd controlefinanceiro
-echo "######### done ###########"
-echo "######### fazendo pull ###########"
 
-git pull
 echo "######### done ###########"
 echo "######### buildando docker ###########"
 docker build -t=hugopaul/controlefinanceiro-prod -f Dockerfile-prod .

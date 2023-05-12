@@ -14,10 +14,6 @@ echo "######### trocando de branch  ###########"
 
 git checkout develop
 echo "######### done ###########"
-echo "######### fazendo pull ###########"
-
-git pull
-echo "######### done ###########"
 echo "######### buildando docker ###########"
 
 docker build -t=hugopaul/controlefinanceiro-dev -f Dockerfile-dev .

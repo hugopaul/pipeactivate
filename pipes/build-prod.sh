@@ -8,15 +8,11 @@ rm -rf controlefinanceiro
 echo "######### done ###########"
 echo "######### clonando projeto ###########"
 
-git clone https://github.com/hugopaul/controlefinanceiro.git
+git clone -b prod https://github.com/hugopaul/controlefinanceiro.git
 echo "######### done ###########"
 echo "######### entrando diretorio clonado ###########"
 
 cd controlefinanceiro
-echo "######### done ###########"
-echo "######### trocando de branch  ###########"
-
-git checkout prod
 echo "######### done ###########"
 echo "######### fazendo pull ###########"
 

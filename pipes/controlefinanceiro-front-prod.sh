@@ -1,21 +1,18 @@
 #!/bin/bash
 
 echo "######### entrando diretorio ###########"
-cd /opt/workspace/
-echo "######### done ###########"
-
-echo "######### removendo diretorio ###########"
-rm -rf /opt/workspace/controlefinanceiro-front
-echo "######### done ###########"
-
-echo "######### clonando projeto ###########"
-git clone -b prod https://github.com/hugopaul/controlefinanceiro-front.git
-echo "######### done ###########"
-
-echo "######### entrando diretorio clonado ###########"
 
 cd /opt/workspace/controlefinanceiro-front
 echo "######### done ###########"
+
+echo "#########  dando pull na branch ###########"
+
+git checkout prod
+
+git pull
+
+echo "######### done ###########"
+
 echo "#########  npm install ###########"
 
 npm install
@@ -30,6 +27,7 @@ echo "######### buildando projeto ###########"
 
 ng build --configuration=prod --base-href=/controle/
 
+sleep 1m
 echo "######### done ###########"
 echo "######### buildando docker ###########"
 

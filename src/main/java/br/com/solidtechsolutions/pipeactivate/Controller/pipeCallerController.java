@@ -29,6 +29,7 @@ public class pipeCallerController {
     @PostMapping("/controlefinanceiro-front")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void controleFinanceiroFrontPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
+        System.out.println("origen da chamada " + request.getRequestURI());
         System.out.println("endpoint controlefinanceiro-front ativado");
         System.out.println(object.toString().substring(0,50));
         String cmd = getCommandControleFinanceiroFrontend(object.toString());

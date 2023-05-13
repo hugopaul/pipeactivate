@@ -1,24 +1,29 @@
 #!/bin/bash
 
 echo "######### entrando diretorio ###########"
+cd /opt/workspace/
+echo "######### done ###########"
+
+echo "######### removendo diretorio ###########"
+rm -rf /opt/workspace/controlefinanceiro-front
+echo "######### done ###########"
+
+echo "######### clonando projeto ###########"
+git clone -b prod https://github.com/hugopaul/controlefinanceiro-front.git
+echo "######### done ###########"
+
+echo "######### entrando diretorio clonado ###########"
+
 cd /opt/workspace/controlefinanceiro-front
-echo "######### done ###########"
-echo "######### trocando de branch  ###########"
-
-git checkout prod
-echo "######### done ###########"
-echo "######### fazendo pull ###########"
-
-git pull
 echo "######### done ###########"
 echo "#########  npm install ###########"
 
 npm install
 
 echo "######### done ###########"
-echo "######### removendo pasta build ###########"
+echo "######### removendo pasta dist ###########"
 
-rm -rf dist
+rm -rf /opt/workspace/controlefinanceiro-front/dist
 
 echo "######### done ###########"
 echo "######### buildando projeto ###########"

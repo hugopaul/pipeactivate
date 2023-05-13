@@ -12,7 +12,11 @@ git checkout prod
 git pull
 
 echo "######### done ###########"
+echo "#########  removendo pack lock ###########"
 
+rm -rf package-lock.json
+
+echo "######### done ###########"
 echo "#########  npm install ###########"
 
 npm install

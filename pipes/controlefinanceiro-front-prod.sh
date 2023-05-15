@@ -22,7 +22,7 @@ rm -rf /opt/workspace/controlefinanceiro-front/dist
 echo "######### done ###########"
 
 echo "######### buildando projeto ###########"
-ng build --configuration=prod --base-href=/controle/
+npm run build
 wait # aguarda ng build terminar
 echo "######### done ###########"
 

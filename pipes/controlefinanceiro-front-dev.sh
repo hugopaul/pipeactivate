@@ -29,10 +29,8 @@ wait
 echo "######### done ###########"
 
 echo "######### buildando projeto ###########"
-ng build --configuration=dev --base-href=/controle-dev/
+npm run build
 wait # aguarda ng build terminar
-sleep 5m
-wait
 echo "######### done ###########"
 
 echo "######### buildando docker ###########"

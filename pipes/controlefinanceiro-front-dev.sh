@@ -44,5 +44,5 @@ wait
 echo "######### done ###########"
 
 echo "######### rodando docker ###########"
-docker run -d -p 100:80 --name  controlefinanceiro-front-dev  hugopaul/controlefinanceiro-front-dev
+docker run -d -p 100:80 --name  controlefinanceiro-front-dev  hugopaul/controlefinanceiro-front-dev --memory 100m
 echo "######### done ###########"

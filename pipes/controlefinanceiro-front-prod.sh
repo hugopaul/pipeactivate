@@ -35,5 +35,5 @@ docker rm "controlefinanceiro-front-prod" -f
 echo "######### done ###########"
 
 echo "######### rodando docker ###########"
-docker run -d -p 101:80 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod
+docker run -d -p 101:80 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod --memory 200m
 echo "######### done ###########"

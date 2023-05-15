@@ -11,7 +11,7 @@ docker rm "controlefinanceiro-dev" -f
 echo "######### done ###########"
 echo "######### rodando docker ###########"
 
-docker run -d -p 8081:8081 --name  controlefinanceiro-dev  hugopaul/controlefinanceiro-dev
+docker run -d -p 8081:8081 --name  controlefinanceiro-dev  hugopaul/controlefinanceiro-dev --memory=100m
 echo "######### done ###########"
 echo "######### removendo pasta ###########"
 

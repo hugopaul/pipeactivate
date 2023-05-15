@@ -25,13 +25,14 @@ echo "######### done ###########"
 echo "######### removendo pasta dist ###########"
 rm -rf /opt/workspace/controlefinanceiro-front/dist
 wait
-sleep 5m
-wait
+
 echo "######### done ###########"
 
 echo "######### buildando projeto ###########"
 ng build --configuration=dev --base-href=/controle-dev/
 wait # aguarda ng build terminar
+sleep 5m
+wait
 echo "######### done ###########"
 
 echo "######### buildando docker ###########"

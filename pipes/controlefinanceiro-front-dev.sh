@@ -25,6 +25,8 @@ echo "######### done ###########"
 echo "######### removendo pasta dist ###########"
 rm -rf /opt/workspace/controlefinanceiro-front/dist
 wait
+sleep 5m
+wait
 echo "######### done ###########"
 
 echo "######### buildando projeto ###########"

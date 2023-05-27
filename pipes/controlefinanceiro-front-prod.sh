@@ -35,5 +35,5 @@ docker rm "controlefinanceiro-front-prod" -f
 echo "######### done ###########"
 
 echo "######### rodando docker ###########"
-docker run -d -p 101:80 --name  controlefinanceiro-front-prod  hugopaul/controlefinanceiro-front-prod --restart=always
+docker run -d -p 101:80 --restart=always --name controlefinanceiro-front-prod hugopaul/controlefinanceiro-front-prod
 echo "######### done ###########"

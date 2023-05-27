@@ -11,7 +11,7 @@ docker rm "controlefinanceiro-prod" -f
 echo "######### done ###########"
 echo "######### rodando docker ###########"
 
-docker run -d -p 8082:8082 --name  controlefinanceiro-prod  hugopaul/controlefinanceiro-prod --memory=200m
+docker run -d -p 8082:8082 --name  controlefinanceiro-prod  hugopaul/controlefinanceiro-prod --restart=always
 echo "######### done ###########"
 echo "######### removendo pasta ###########"
 

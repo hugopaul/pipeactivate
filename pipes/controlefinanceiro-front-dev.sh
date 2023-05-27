@@ -8,14 +8,15 @@ echo "######### done ###########"
 echo "#########  dando pull na branch ###########"
 git checkout develop
 wait
-git pull origin develop
+
+git pull origin develop --rebase
 wait
 echo "######### done ###########"
 
-echo "#########  removendo pack lock ###########"
-rm -rf package-lock.json
-wait
-echo "######### done ###########"
+#echo "#########  removendo pack lock ###########"
+#rm -rf package-lock.json
+#wait
+#echo "######### done ###########"
 
 echo "#########  npm install ###########"
 npm install

@@ -6,12 +6,12 @@ echo "######### done ###########"
 
 echo "#########  dando pull na branch ###########"
 git checkout prod
-git pull origin prod
+git pull origin prod --rebase
 echo "######### done ###########"
 
-echo "#########  removendo pack lock ###########"
-rm -rf package-lock.json
-echo "######### done ###########"
+#echo "#########  removendo pack lock ###########"
+#rm -rf package-lock.json
+#echo "######### done ###########"
 
 echo "#########  npm install ###########"
 npm install

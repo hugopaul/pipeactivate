@@ -6,7 +6,7 @@ echo "######### done ###########"
 
 echo "#########  dando pull na branch ###########"
 git checkout prod
-git pull
+git pull origin prod
 echo "######### done ###########"
 
 echo "#########  removendo pack lock ###########"

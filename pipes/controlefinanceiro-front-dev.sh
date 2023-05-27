@@ -8,7 +8,7 @@ echo "######### done ###########"
 echo "#########  dando pull na branch ###########"
 git checkout develop
 wait
-git pull
+git pull origin develop
 wait
 echo "######### done ###########"
 

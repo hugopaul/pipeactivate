@@ -36,6 +36,15 @@ public class pipeCallerController {
         executeCommand(cmd);
     }
 
+    @PostMapping("/landing")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void landingLowyerPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
+        System.out.println("origen da chamada " + request);
+        System.out.println(object.toString().substring(0,50));
+        String cmd = getLandingPage(object.toString());
+        executeCommand(cmd);
+    }
+
     private String getCommandControleFinanceiroBackend(String objectString) {
         if (objectString.startsWith("{ref=refs/heads/develop")) {
             System.out.println("branch origin --> ref=refs/heads/develop ");
@@ -45,6 +54,9 @@ public class pipeCallerController {
             return "sh /opt/workspace/pipeactivate/pipes/controlefinanceiro-prod.sh";
         }
         return null;
+    }
+    private String getLandingPage(String objectString) {
+            return "sh /opt/workspace/pipeactivate/pipes/landing.sh";
     }
     private String getCommandControleFinanceiroFrontend(String objectString) {
         if (objectString.startsWith("{ref=refs/heads/develop")) {

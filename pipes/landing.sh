@@ -1,28 +1,28 @@
 #!/bin/bash
 
-echo "######### entrando diretorio ###########"
-cd /opt/workspace/landing-lowyer
-wait
-echo "######### done ###########"
+# Defina o diretório do projeto
+PROJECT_DIR="/opt/workspace/landing-lowyer"
 
-echo "#########  dando pull na branch ###########"
-git checkout main
-wait
+echo "######### Verificando se o diretório do projeto existe ###########"
+if [ ! -d "$PROJECT_DIR" ]; then
+    echo "Diretório $PROJECT_DIR não existe, clonando o projeto..."
+    git clone https://github.com/hugopaul/landing-lowyer.git "$PROJECT_DIR"
+else
+    echo "Diretório já existe. Entrando no diretório e atualizando o projeto..."
+    cd "$PROJECT_DIR"
 
-git pull origin main --rebase
-wait
-echo "######### done ###########"
+    echo "######### Atualizando o projeto ###########"
+    git checkout main
+    git pull origin main --rebase
+fi
 
-echo "######### buildando docker ###########"
-docker build -f Dockerfile  -t=hugopaul/landing-page .
-wait
-echo "######### done ###########"
+echo "######### Construindo o Docker ###########"
+docker build -f Dockerfile -t hugopaul/landing-page "$PROJECT_DIR"
 
-echo "######### removendo imagem antiga ###########"
-docker rm "landing-page" -f
-wait
-echo "######### done ###########"
+echo "######### Removendo o contêiner antigo, se existir ###########"
+docker rm "landing-page" -f || true
 
-echo "######### rodando docker ###########"
-docker run -d -p 102:80 --name  landing-page  hugopaul/landing-page
-echo "######### done ###########"
+echo "######### Rodando o contêiner do Docker ###########"
+docker run -d -p 80:80 --name landing-page hugopaul/landing-page
+
+echo "######### Processo concluído com sucesso ###########"

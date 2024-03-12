@@ -39,7 +39,7 @@ public class pipeCallerController {
     @PostMapping("/landing")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void landingLowyerPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
-        System.out.println("origen da chamada " + request);
+        System.out.println("origen da chamada " + request.getRequestURI());
         System.out.println(object.toString().substring(0,50));
         String cmd = getLandingPage(object.toString());
         executeCommand(cmd);

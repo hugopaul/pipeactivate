@@ -17,12 +17,12 @@ else
 fi
 
 echo "######### Construindo o Docker ###########"
-docker build -f Dockerfile -t hugopaul/landing-page "$PROJECT_DIR"
+docker build -f Dockerfile -t hugopaul/landing-page .
 
 echo "######### Removendo o contêiner antigo, se existir ###########"
 docker rm "landing-page" -f || true
 
 echo "######### Rodando o contêiner do Docker ###########"
-docker run -d -p 80:80 --name landing-page hugopaul/landing-page
+docker run -d -p 101:80 --name landing-page hugopaul/landing-page
 
 echo "######### Processo concluído com sucesso ###########"

@@ -5,7 +5,10 @@ cd /opt/workspace/lourivalekamyla-front
 echo "######### done ###########"
 
 echo "#########  dando pull na branch ###########"
+git reset --hard
+
 git checkout main
+git fetch
 git pull origin main --rebase
 echo "######### done ###########"
 

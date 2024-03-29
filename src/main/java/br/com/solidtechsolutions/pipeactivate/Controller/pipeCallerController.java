@@ -36,6 +36,16 @@ public class pipeCallerController {
         executeCommand(cmd);
     }
 
+    @PostMapping("/lourivalekamyla-front")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void lourivalEKamylaFrontPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
+        System.out.println("origen da chamada " + request);
+        System.out.println("endpoint controlefinanceiro-front ativado");
+        System.out.println(object.toString().substring(0,50));
+        String cmd = getCommandControleFinanceiroFrontend(object.toString());
+        executeCommand(cmd);
+    }
+
     @PostMapping("/landing")
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void landingLowyerPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
@@ -58,6 +68,12 @@ public class pipeCallerController {
     private String getLandingPage(String objectString) {
             return "sh /opt/workspace/pipeactivate/pipes/landing.sh";
     }
+
+
+    private String getLourivaleKamylaPage(String objectString) {
+        return "sh /opt/workspace/pipeactivate/pipes/lourivalekamyla-front.sh";
+    }
+
     private String getCommandControleFinanceiroFrontend(String objectString) {
         if (objectString.startsWith("{ref=refs/heads/develop")) {
             System.out.println("branch origin --> ref=refs/heads/develop ");

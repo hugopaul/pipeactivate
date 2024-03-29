@@ -40,7 +40,7 @@ public class pipeCallerController {
     @ResponseStatus(HttpStatus.ACCEPTED)
     public void lourivalEKamylaFrontPipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
         System.out.println("origen da chamada " + request);
-        System.out.println("endpoint controlefinanceiro-front ativado");
+        System.out.println("endpoint lourivalekamyla-front ativado");
         System.out.println(object.toString().substring(0,50));
         String cmd = getCommandControleFinanceiroFrontend(object.toString());
         executeCommand(cmd);

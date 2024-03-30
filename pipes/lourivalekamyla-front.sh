@@ -12,23 +12,6 @@ git fetch
 git pull origin main --rebase
 echo "######### done ###########"
 
-#echo "#########  removendo pack lock ###########"
-#rm -rf package-lock.json
-#echo "######### done ###########"
-
-echo "#########  npm install ###########"
-npm install
-echo "######### done ###########"
-
-echo "######### removendo pasta dist ###########"
-rm -rf /opt/workspace/lourivalekamyla-front/dist
-echo "######### done ###########"
-
-echo "######### buildando projeto ###########"
-npm run build
-wait # aguarda ng build terminar
-echo "######### done ###########"
-
 echo "######### buildando docker ###########"
 docker build -f Dockerfile  -t=hugopaul/lourivalekamyla-front .
 echo "######### done ###########"

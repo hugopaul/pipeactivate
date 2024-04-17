@@ -16,8 +16,8 @@ else
     git pull origin main --rebase
 fi
 
-echo "######### Construindo o Docker com Buildx ###########"
-docker buildx build --load -f Dockerfile -t hugopaul/landing-page .
+echo "######### Construindo o Docker ###########"
+docker build -f Dockerfile -t hugopaul/landing-page .
 
 echo "######### Removendo o contêiner antigo, se existir ###########"
 docker rm "landing-page" -f || true

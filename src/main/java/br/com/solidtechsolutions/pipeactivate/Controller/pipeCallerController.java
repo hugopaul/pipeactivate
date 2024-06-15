@@ -55,6 +55,19 @@ public class pipeCallerController {
         executeCommand(cmd);
     }
 
+    @PostMapping("/apipagamentos")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void apiPagamentosCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
+        System.out.println("endpoint apiPagamentos ativado");
+        System.out.println(object.toString().substring(0,50));
+        String cmd = getCommandControleFinanceiroBackend(object.toString());
+        executeCommand(cmd);
+    }
+
+    private String getCommandApiPagamentosBackend(String objectString) {
+        return "sh /opt/workspace/pipeactivate/pipes/apipagamentos.sh";
+    }
+
     private String getCommandControleFinanceiroBackend(String objectString) {
         if (objectString.startsWith("{ref=refs/heads/develop")) {
             System.out.println("branch origin --> ref=refs/heads/develop ");

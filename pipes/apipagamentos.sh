@@ -8,7 +8,10 @@ REPO_URL="https://github.com/hugopaul/apipagamentos.git"
 REPO_NAME="apipagamentos"
 IMAGE_NAME="hugopaul/apipagamentos"
 CONTAINER_NAME="apipagamentos"
-PROJECT_TOKEN=${APIPAGAMENTOS_TOKEN_ENV}  # Use a variável de ambiente
+PROJECT_TOKEN=${PROJECT_TOKEN_ENV}  # Use a variável de ambiente
+
+# Mostrar o valor da variável PROJECT_TOKEN
+echo "PROJECT TOKEN: ${PROJECT_TOKEN}"
 
 echo "######### Entrando no diretório ###########"
 cd "$WORKSPACE_DIR"

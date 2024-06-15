@@ -8,7 +8,7 @@ REPO_URL="https://github.com/hugopaul/apipagamentos.git"
 REPO_NAME="apipagamentos"
 IMAGE_NAME="hugopaul/apipagamentos"
 CONTAINER_NAME="apipagamentos"
-PROJECT_TOKEN=${PROJECT_TOKEN_ENV}  # Use a variável de ambiente
+PROJECT_TOKEN=${APIPAGAMENTOS_TOKEN_ENV}  # Use a variável de ambiente
 
 echo "######### Entrando no diretório ###########"
 cd "$WORKSPACE_DIR"
@@ -19,7 +19,7 @@ rm -rf "$REPO_NAME"
 echo "######### Done ###########"
 
 echo "######### Clonando projeto ###########"
-git clone https://${APIPAGAMENTOS_TOKEN_ENV}@github.com/hugopaul/apipagamentos.git
+git clone https://${PROJECT_TOKEN}:x-oauth-basic@github.com/hugopaul/apipagamentos.git
 echo "######### Done ###########"
 
 echo "######### Entrando no diretório clonado ###########"

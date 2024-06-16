@@ -60,7 +60,7 @@ public class pipeCallerController {
     public void apiPagamentosCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
         System.out.println("endpoint apiPagamentos ativado");
         System.out.println(object.toString().substring(0,50));
-        String cmd = getCommandControleFinanceiroBackend(object.toString());
+        String cmd = getCommandApiPagamentosBackend(object.toString());
         executeCommand(cmd);
     }
 

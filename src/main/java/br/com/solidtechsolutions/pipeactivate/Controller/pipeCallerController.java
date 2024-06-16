@@ -64,9 +64,24 @@ public class pipeCallerController {
         executeCommand(cmd);
     }
 
+    @PostMapping("/ecommerce")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void eCommercePipeCaller(@RequestBody Object object, HttpServletRequest request) throws IOException, InterruptedException {
+        System.out.println("origen da chamada " + request.getRequestURI());
+        System.out.println(object.toString().substring(0,50));
+        String cmd = getEcommercePage(object.toString());
+        executeCommand(cmd);
+    }
+
+
     private String getCommandApiPagamentosBackend(String objectString) {
         return "sh /opt/workspace/pipeactivate/pipes/apipagamentos.sh";
     }
+
+    private String getEcommercePage(String objectString) {
+        return "sh /opt/workspace/pipeactivate/pipes/ecommerce.sh";
+    }
+
 
     private String getCommandControleFinanceiroBackend(String objectString) {
         if (objectString.startsWith("{ref=refs/heads/develop")) {

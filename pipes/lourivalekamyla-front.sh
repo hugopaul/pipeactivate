@@ -8,18 +8,41 @@ REPO_NAME="lourivalekamyla-front"
 IMAGE_NAME="hugopaul/lourivalekamyla-front"
 CONTAINER_NAME="lourivalekamyla-front"
 
+# Verifica se PROJECT_TOKEN está definido
+if [ -z "$PROJECT_TOKEN" ]; then
+  echo "Error: PROJECT_TOKEN não está definido."
+  exit 1
+fi
+
 echo "######### Entrando no diretório ###########"
+cd "$WORKSPACE_DIR"
+echo "######### Done ###########"
+
+echo "######### Removendo diretório antigo ###########"
+rm -rf "$REPO_NAME"
+echo "######### Done ###########"
+
+echo "######### Clonando projeto ###########"
+git clone https://${PROJECT_TOKEN}:x-oauth-basic@github.com/hugopaul/$REPO_NAME.git
+echo "######### Done ###########"
+
+echo "######### Entrando no diretório clonado ###########"
 cd "$WORKSPACE_DIR/$REPO_NAME"
 echo "######### Done ###########"
 
-echo "######### Dando reset e pull na branch ###########"
-git reset --hard
-git checkout main
-git fetch
-git pull origin main --rebase
+echo "######### Instalando dependências npm ###########"
+npm install
 echo "######### Done ###########"
 
-echo "######### Buildando Docker ###########"
+echo "######### Removendo pasta dist antiga ###########"
+rm -rf dist
+echo "######### Done ###########"
+
+echo "######### Buildando projeto ###########"
+npm run build
+echo "######### Done ###########"
+
+echo "######### Buildando imagem Docker ###########"
 docker build -f Dockerfile -t="$IMAGE_NAME" .
 echo "######### Done ###########"
 
@@ -29,6 +52,6 @@ if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
 fi
 echo "######### Done ###########"
 
-echo "######### Rodando Docker ###########"
+echo "######### Rodando contêiner Docker ###########"
 docker run -d -p 5000:80 --restart=always --name "$CONTAINER_NAME" "$IMAGE_NAME"
 echo "######### Done ###########"

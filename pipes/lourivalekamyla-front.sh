@@ -7,6 +7,7 @@ WORKSPACE_DIR="/opt/workspace"
 REPO_NAME="lourivalekamyla-front"
 IMAGE_NAME="hugopaul/lourivalekamyla-front"
 CONTAINER_NAME="lourivalekamyla-front"
+PROJECT_TOKEN=${PROJECT_TOKEN_ENV}  # Use a variável de ambiente
 
 # Verifica se PROJECT_TOKEN está definido
 if [ -z "$PROJECT_TOKEN" ]; then

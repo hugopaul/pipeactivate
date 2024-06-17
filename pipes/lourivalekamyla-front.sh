@@ -39,10 +39,6 @@ echo "######### Removendo pasta dist antiga ###########"
 rm -rf dist
 echo "######### Done ###########"
 
-echo "######### Buildando projeto ###########"
-npm run build
-echo "######### Done ###########"
-
 echo "######### Buildando imagem Docker ###########"
 docker build -f Dockerfile -t="$IMAGE_NAME" .
 echo "######### Done ###########"

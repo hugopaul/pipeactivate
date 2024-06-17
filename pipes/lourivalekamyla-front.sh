@@ -15,10 +15,6 @@ if [ -z "$PROJECT_TOKEN" ]; then
   exit 1
 fi
 
-echo "######### Entrando no diretório ###########"
-cd "$WORKSPACE_DIR"
-echo "######### Done ###########"
-
 echo "######### Removendo diretório antigo ###########"
 rm -rf "$REPO_NAME"
 echo "######### Done ###########"
@@ -27,16 +23,8 @@ echo "######### Clonando projeto ###########"
 git clone https://${PROJECT_TOKEN}:x-oauth-basic@github.com/hugopaul/$REPO_NAME.git
 echo "######### Done ###########"
 
-echo "######### Entrando no diretório clonado ###########"
-cd "$WORKSPACE_DIR/$REPO_NAME"
-echo "######### Done ###########"
-
-echo "######### Instalando dependências npm ###########"
-npm install
-echo "######### Done ###########"
-
-echo "######### Removendo pasta dist antiga ###########"
-rm -rf dist
+echo "######### Entrando no diretório ###########"
+cd "$WORKSPACE_DIR"
 echo "######### Done ###########"
 
 echo "######### Buildando imagem Docker ###########"

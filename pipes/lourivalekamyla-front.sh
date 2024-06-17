@@ -24,7 +24,7 @@ git clone https://${PROJECT_TOKEN}:x-oauth-basic@github.com/hugopaul/$REPO_NAME.
 echo "######### Done ###########"
 
 echo "######### Entrando no diretório ###########"
-cd "$WORKSPACE_DIR"
+cd "$WORKSPACE_DIR"/"$REPO_NAME"
 echo "######### Done ###########"
 
 echo "######### Buildando imagem Docker ###########"

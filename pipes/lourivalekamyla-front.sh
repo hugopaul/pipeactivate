@@ -16,6 +16,7 @@ if [ -z "$PROJECT_TOKEN" ]; then
 fi
 
 echo "######### Removendo diretório antigo ###########"
+cd "$WORKSPACE_DIR"
 rm -rf "$REPO_NAME"
 echo "######### Done ###########"
 

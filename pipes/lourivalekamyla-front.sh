@@ -1,43 +1,36 @@
 #!/bin/bash
 
-set -e  # Exit immediately if a command exits with a non-zero status
+# Defina o diretório do projeto
+PROJECT_DIR="/opt/workspace/lourivalekamyla-front"
 
-# Defina suas variáveis
-WORKSPACE_DIR="/opt/workspace"
-REPO_NAME="lourivalekamyla-front"
-IMAGE_NAME="hugopaul/lourivalekamyla-front"
-CONTAINER_NAME="lourivalekamyla-front"
-PROJECT_TOKEN=${PROJECT_TOKEN_ENV}  # Use a variável de ambiente
-
-# Verifica se PROJECT_TOKEN está definido
-if [ -z "$PROJECT_TOKEN" ]; then
-  echo "Error: PROJECT_TOKEN não está definido."
-  exit 1
+# Use a variável de ambiente PROJECT_TOKEN_ENV, ou exiba um erro se não estiver definida
+if [ -z "$PROJECT_TOKEN_ENV" ]; then
+    echo "Erro: A variável de ambiente PROJECT_TOKEN_ENV não está definida."
+    exit 1
 fi
 
-echo "######### Removendo diretório antigo ###########"
-cd "$WORKSPACE_DIR"
-rm -rf "$REPO_NAME"
-echo "######### Done ###########"
+PROJECT_TOKEN=${PROJECT_TOKEN_ENV}
 
-echo "######### Clonando projeto ###########"
-git clone https://${PROJECT_TOKEN}:x-oauth-basic@github.com/hugopaul/$REPO_NAME.git
-echo "######### Done ###########"
+echo "######### Verificando se o diretório do projeto existe ###########"
+if [ ! -d "$PROJECT_DIR" ]; then
+    echo "Diretório $PROJECT_DIR não existe, clonando o projeto..."
+    git clone https://${PROJECT_TOKEN}:x-oauth-basic@github.com/hugopaul/lourivalekamyla-front.git "$PROJECT_DIR"
+else
+    echo "Diretório já existe. Entrando no diretório e atualizando o projeto..."
+    cd "$PROJECT_DIR" || { echo "Falha ao entrar no diretório $PROJECT_DIR"; exit 1; }
 
-echo "######### Entrando no diretório ###########"
-cd "$WORKSPACE_DIR"/"$REPO_NAME"
-echo "######### Done ###########"
-
-echo "######### Buildando imagem Docker ###########"
-docker build -f Dockerfile -t="$IMAGE_NAME" .
-echo "######### Done ###########"
-
-echo "######### Removendo contêiner antigo ###########"
-if [ "$(docker ps -aq -f name=$CONTAINER_NAME)" ]; then
-    docker rm -f "$CONTAINER_NAME"
+    echo "######### Atualizando o projeto ###########"
+    git checkout main
+    git pull origin main --rebase
 fi
-echo "######### Done ###########"
 
-echo "######### Rodando contêiner Docker ###########"
-docker run -d -p 5000:80 --restart=always --name "$CONTAINER_NAME" "$IMAGE_NAME"
-echo "######### Done ###########"
+echo "######### Construindo o Docker ###########"
+docker build -f Dockerfile -t hugopaul/lourivalekamyla-front .
+
+echo "######### Removendo o contêiner antigo, se existir ###########"
+docker rm -f "lourivalekamyla-front" || true
+
+echo "######### Rodando o contêiner do Docker ###########"
+docker run -d -p 5000:80 --name lourivalekamyla-front --restart=always hugopaul/lourivalekamyla-front
+
+echo "######### Processo concluído com sucesso ###########"
